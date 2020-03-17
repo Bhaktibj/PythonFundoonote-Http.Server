@@ -1,0 +1,27 @@
+action: py34, msg: getenv
+cwd: /home/admin1/PycharmProjects/fundoo_without_framework/fundoonote
+cmd: /home/admin1/PycharmProjects/fundoo_without_framework/fundoonote/.tox/py34/bin/python -m pip install pytest
+Collecting pytest
+  Using cached pytest-5.3.5-py3-none-any.whl (235 kB)
+Collecting more-itertools>=4.0.0
+  Using cached more_itertools-8.2.0-py3-none-any.whl (43 kB)
+Collecting pluggy<1.0,>=0.12
+  Using cached pluggy-0.13.1-py2.py3-none-any.whl (18 kB)
+Collecting py>=1.5.0
+  Using cached py-1.8.1-py2.py3-none-any.whl (83 kB)
+Collecting attrs>=17.4.0
+  Using cached attrs-19.3.0-py2.py3-none-any.whl (39 kB)
+Collecting wcwidth
+  Using cached wcwidth-0.1.8-py2.py3-none-any.whl (17 kB)
+Collecting importlib-metadata>=0.12; python_version < "3.8"
+  Using cached importlib_metadata-1.5.0-py2.py3-none-any.whl (30 kB)
+Collecting packaging
+  Using cached packaging-20.1-py2.py3-none-any.whl (36 kB)
+Collecting zipp>=0.5
+  Using cached zipp-3.0.0-py3-none-any.whl (4.8 kB)
+Collecting pyparsing>=2.0.2
+  Using cached pyparsing-2.4.6-py2.py3-none-any.whl (67 kB)
+Collecting six
+  Using cached six-1.14.0-py2.py3-none-any.whl (10 kB)
+Installing collected packages: more-itertools, zipp, importlib-metadata, pluggy, py, attrs, wcwidth, pyparsing, six, packaging, pytest
+Successfully installed attrs-19.3.0 importlib-metadata-1.5.0 more-itertools-8.2.0 packaging-20.1 pluggy-0.13.1 py-1.8.1 pyparsing-2.4.6 pytest-5.3.5 six-1.14.0 wcwidth-0.1.8 zipp-3.0.0
