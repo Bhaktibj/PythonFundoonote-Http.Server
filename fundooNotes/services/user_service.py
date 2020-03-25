@@ -3,9 +3,8 @@ from ..common.db_operation import *
 from ..common.utils import email_validation, password_validation, cache, profiler, jwt_obj, json_response, hash_password
 from ..common.send_email import SendMail
 
-
-# from ..config.s3_connections import BotoService, region
-# boto = BotoService
+from ..config.s3_connections import BotoService, region
+boto = BotoService
 
 
 class UserServices:
