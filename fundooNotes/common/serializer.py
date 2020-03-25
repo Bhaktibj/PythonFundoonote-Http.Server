@@ -3,7 +3,7 @@ import json
 
 
 class AlchemyEncoder(json.JSONEncoder):
-
+    """ This class is used for serialize the object and return the json response"""
     def default(self, obj):
         if isinstance(obj.__class__, DeclarativeMeta):
             # an SQLAlchemy class
@@ -21,7 +21,4 @@ class AlchemyEncoder(json.JSONEncoder):
         return json.JSONEncoder.default(self, obj)
 
 
-def serialize_data(object):
-    serializer_data = json.dumps(object, cls=AlchemyEncoder)
-    data = json.loads(serializer_data)
-    return data
+

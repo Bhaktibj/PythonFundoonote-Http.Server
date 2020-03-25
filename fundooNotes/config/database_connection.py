@@ -1,77 +1,32 @@
+# import lib
 import pymysql
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import warnings
 pymysql.install_as_MySQLdb()
+from setting import DATABASE, MYSQL_DB_CONFIG, logger
+from ..models.model import DeclarativeBase
+
+with warnings.catch_warnings():   # with warnings
+    warnings.simplefilter('ignore') # if warning just ignore that
+    try:
+        db_engine = create_engine(
+            'mysql+pymysql://{user}:{password}@{host}:{port}/{db_name}'.format(**MYSQL_DB_CONFIG))
+        db_engine.execute("CREATE DATABASE IF NOT EXISTS {} ".format(MYSQL_DB_CONFIG.get("db_name"))) # create the engin
+        logger.info("mysql database connected: {}".format(db_engine))
+        DeclarativeBase.metadata.create_all(db_engine)  # create all engine
+    except:
+        raise Exception("Connection error") # if database not created or connection failed
 
 
+def db_session():
+    """ this method is used to create the session"""
+    try:
+        if db_engine:   # if db_engine
+            Session = sessionmaker()  # create session using sessionmaker() lib
+            Session.configure(bind=db_engine)  # configure engine
+            session = Session()
+            return session  # return session object
+    except:
+        raise Exception("connection error") # if database is not created
 
-
-from setting import ConfigService
-
-obj = ConfigService()
-
-Base = declarative_base()
-
-
-class DatabaseService:
-
-    def __init__(self):
-        self.session = self.connect()
-
-    def connect(self):
-        try:
-            engine = create_engine(
-                obj.DATABASE['database']
-            )
-            Base = declarative_base()
-            Base.metadata.create_all(engine)
-            DBSession = sessionmaker(bind=engine)
-            session = DBSession()
-            obj.logger.info("==========> database is connected: {}".format(engine))
-            return session
-        except:
-            return "database connection failed"
-
-    def save_into_db(self, obj):
-        try:
-            if obj is not None:
-                self.session.add(obj)
-                self.session.commit()
-                self.session.close()
-        except:
-            return False
-        return True
-
-    def filter_by(self, tabel, email):
-        var = self.session.query(tabel).filter_by(email=email).first()
-        return var
-
-    def filter_by_id(self, model, id):
-        id = self.session.query(model).filter_by(id=id).first()
-        return id
-
-    def filter_by_all(self, model, id):
-        id = self.session.query(model).filter_by(id=id).all()
-        return id
-
-    def update_query(self, tabel, email, password):
-        reset_password = self.session.query(tabel).filter_by(email=email).update({tabel.password: password},
-                                                                                 synchronize_session=False)
-        self.session.commit()
-        self.session.close()
-        return reset_password
-
-    def fetch_all(self, model):
-        data = self.session.query(model).all()
-        return data
-
-    def delete_data_from_db(self, model, id):
-        obj = self.session.query(model).filter_by(id=id).first()
-        if obj is not None:
-            self.session.delete(obj)
-            self.session.commit()
-            self.session.close()
-            return True
-        else:
-            return False

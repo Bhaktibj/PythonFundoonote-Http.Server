@@ -1,7 +1,0 @@
-action: py27, msg: getenv
-cwd: /home/admin1/PycharmProjects/fundoo_without_framework/fundoonote/.tox
-cmd: /home/admin1/PycharmProjects/fundoo_without_framework/venv/bin/python -m virtualenv --no-download --python /home/admin1/PycharmProjects/fundoo_without_framework/venv/bin/python py27
-created virtual environment CPython3.6.9.final.0-64 in 1754ms
-  creator CPython3Posix(dest=/home/admin1/PycharmProjects/fundoo_without_framework/fundoonote/.tox/py27, clear=False, global=False)
-  seeder FromAppData(download=False, pip=latest, setuptools=latest, wheel=latest, via=copy, app_data_dir=/home/admin1/.local/share/virtualenv/seed-app-data/v1)
-  activators BashActivator,CShellActivator,FishActivator,PowerShellActivator,PythonActivator,XonshActivator
