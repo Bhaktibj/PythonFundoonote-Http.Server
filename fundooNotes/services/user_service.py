@@ -126,48 +126,48 @@ class UserServices:
         else:
             return json_response("already logout user")  # return false response
 
-    # def s3_upload(self, data):
-    #     """ This method is used for upload the image on s3 bucket"""
-    #     try:
-    #         if data['image'] is None: # check image is  None or not
-    #             return json_response(" Image is None") # if image is None
-    #         result = boto.bucket_exist(bucket_name=data['bucket_name'])  # check bucket is exist or not
-    #         if result is False:  # if result is false
-    #             boto.create_bucket(bucket_name=data['bucket_name'], region=region) # create the new bucket  and uplaod image
-    #             boto.upload_files(upload_file=data['image'], bucket_name=data['bucket_name'],  # upload image
-    #                               file_name=data['file_name'])
-    #             return json_response(success=True,
-    #                                  message="Successfully created new bucket" + data['bucket_name'] + "and uploaded image",
-    #                                  data=data) # return new bucket and uploaded image
-    #         else:
-    #             boto.upload_files(upload_file=data['image'], bucket_name=data['bucket_name'],
-    #                               file_name=data['file_name'])  # if bucket is exist uploaded the image
-    #             return json_response(success=True, message="Successfully uploaded image", data=data) # return success response
-    #     except:
-    #         return json_response("missing values or invalid data")
-    #
-    # def get_s3_objects(self, data):
-    #     """ This method is used to get object from s3 bucket"""
-    #     try:
-    #         result = boto.bucket_exist(bucket_name=data['bucket_name'])  # check bucket is exist or not
-    #         images = []
-    #         if result is True: # if result is true
-    #             objects = boto.list_bucket_objects(data['bucket_name'])  # listing object from bucket function
-    #             if objects is not None:  # if objects is not none
-    #                 list = []
-    #                 for object in objects: # return object from objects
-    #                     list.append(object) # append in list
-    #                 for image in list: # take images from list
-    #                     bucket_object = f' {image["Key"]}' # return image name
-    #                     print("Image_name", bucket_object)
-    #                     images.append(bucket_object) # append the image objects in images list
-    #                 print(list)
-    #                 # return all images response
-    #                 return json_response(success=True, message="successfully listing objects from bucket", data=images)
-    #             else:
-    #                 return json_response(success=False, message="empty bucket", data=[]) # return empty bucket
-    #         else:
-    #             return json_response(success=False, message="does not exist bucket", data=[]) # does not exist bcuket
-    #     except:
-    #         return json_response("password is too same please enter another password")  # return password is too same
-    #
+    def s3_upload(self, data):
+        """ This method is used for upload the image on s3 bucket"""
+        try:
+            if data['image'] is None: # check image is  None or not
+                return json_response(" Image is None") # if image is None
+            result = boto.bucket_exist(bucket_name=data['bucket_name'])  # check bucket is exist or not
+            if result is False:  # if result is false
+                boto.create_bucket(bucket_name=data['bucket_name'], region=region) # create the new bucket  and uplaod image
+                boto.upload_files(upload_file=data['image'], bucket_name=data['bucket_name'],  # upload image
+                                  file_name=data['file_name'])
+                return json_response(success=True,
+                                     message="Successfully created new bucket" + data['bucket_name'] + "and uploaded image",
+                                     data=data) # return new bucket and uploaded image
+            else:
+                boto.upload_files(upload_file=data['image'], bucket_name=data['bucket_name'],
+                                  file_name=data['file_name'])  # if bucket is exist uploaded the image
+                return json_response(success=True, message="Successfully uploaded image", data=data) # return success response
+        except:
+            return json_response("missing values or invalid data")
+
+    def get_s3_objects(self, data):
+        """ This method is used to get object from s3 bucket"""
+        try:
+            result = boto.bucket_exist(bucket_name=data['bucket_name'])  # check bucket is exist or not
+            images = []
+            if result is True: # if result is true
+                objects = boto.list_bucket_objects(data['bucket_name'])  # listing object from bucket function
+                if objects is not None:  # if objects is not none
+                    list = []
+                    for object in objects: # return object from objects
+                        list.append(object) # append in list
+                    for image in list: # take images from list
+                        bucket_object = f' {image["Key"]}' # return image name
+                        print("Image_name", bucket_object)
+                        images.append(bucket_object) # append the image objects in images list
+                    print(list)
+                    # return all images response
+                    return json_response(success=True, message="successfully listing objects from bucket", data=images)
+                else:
+                    return json_response(success=False, message="empty bucket", data=[]) # return empty bucket
+            else:
+                return json_response(success=False, message="does not exist bucket", data=[]) # does not exist bcuket
+        except:
+            return json_response("password is too same please enter another password")  # return password is too same
+

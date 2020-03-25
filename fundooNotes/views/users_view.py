@@ -2,7 +2,7 @@ import cgi
 import cgitb
 cgitb.enable()
 from ..services.user_service import UserServices
-from ..common.utils import  json_response
+from ..common.utils import json_response
 user_service = UserServices()
 
 
@@ -90,28 +90,28 @@ class UserDetails:
         response_data = user_service.logout_user()
         return response_data
 
-    # def upload_profile(self):
-    #     form = cgi.FieldStorage(
-    #         fp=self.rfile,
-    #         headers=self.headers,
-    #         environ={'REQUEST_METHOD': 'POST', 'CONTENT_TYPE': self.headers['Content-Type'], }
-    #     )
-    #     try:
-    #         data = {'image': form['image'].value, 'bucket_name': form['bucket_name'].value, 'file_name': form['file_name'].value}
-    #         response_data = user_service.s3_upload(data)
-    #         return response_data
-    #     except KeyError:
-    #         return json_response("missing values or wrong format")
-    #
-    # def get_object_from_bucket(self):
-    #     form = cgi.FieldStorage(
-    #         fp=self.rfile,
-    #         headers=self.headers,
-    #         environ={'REQUEST_METHOD': 'POST', 'CONTENT_TYPE': self.headers['Content-Type'], }
-    #     )
-    #     try:
-    #         data = {'bucket_name': form['bucket_name'].value}
-    #         response_data = user_service.get_s3_objects(data)
-    #         return response_data
-    #     except KeyError:
-    #         return json_response("missing values or wrong format")
+    def upload_profile(self):
+        form = cgi.FieldStorage(
+            fp=self.rfile,
+            headers=self.headers,
+            environ={'REQUEST_METHOD': 'POST', 'CONTENT_TYPE': self.headers['Content-Type'], }
+        )
+        try:
+            data = {'image': form['image'].value, 'bucket_name': form['bucket_name'].value, 'file_name': form['file_name'].value}
+            response_data = user_service.s3_upload(data)
+            return response_data
+        except KeyError:
+            return json_response("missing values or wrong format")
+
+    def get_object_from_bucket(self):
+        form = cgi.FieldStorage(
+            fp=self.rfile,
+            headers=self.headers,
+            environ={'REQUEST_METHOD': 'POST', 'CONTENT_TYPE': self.headers['Content-Type'], }
+        )
+        try:
+            data = {'bucket_name': form['bucket_name'].value}
+            response_data = user_service.get_s3_objects(data)
+            return response_data
+        except KeyError:
+            return json_response("missing values or wrong format")
