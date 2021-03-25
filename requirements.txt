@@ -65,7 +65,7 @@ pytest-dotenv==0.4.0
 python-dotenv==0.10.5
 python-magic==0.4.15
 pytz==2019.3
-PyYAML==3.12
+PyYAML==5.4
 redis==3.4.1
 requests==2.22.0
 safrs==1.0.17
